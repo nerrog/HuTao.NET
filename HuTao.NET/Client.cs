@@ -34,7 +34,7 @@ namespace HuTao.NET
         public async Task<UserStats> FetchUserStats(string? uid = null)
         {
             string target_uid = uid ?? cookie.ltuid;
-            string url = clientData.EndPoints.UserStats + $"?uid={target_uid}";
+            string url = clientData.EndPoints.UserStats.Url + $"?uid={target_uid}";
             return await new Wrapper<UserStats>(clientData).FetchData(url, this.cookie);
         }
 
