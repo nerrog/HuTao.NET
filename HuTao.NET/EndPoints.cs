@@ -7,6 +7,7 @@
         public EndPoint GenshinStats = new EndPoint("https://bbs-api-os.hoyolab.com/game_record/genshin/api/index", true, true);
         public EndPoint GenshinDailyNote = new EndPoint("https://bbs-api-os.hoyolab.com/game_record/genshin/api/dailyNote", true, true);
         public EndPoint GetLanguage = new EndPoint("https://bbs-api-os.hoyolab.com/community/misc/wapi/langs", false, false);
+        public EndPoint GetRoles = new EndPoint("https://api-account-os.hoyolab.com/binding/api/getUserGameRolesByLtoken", true, false);
     }
 
     public class EndPoint

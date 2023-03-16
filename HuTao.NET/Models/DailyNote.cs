@@ -20,7 +20,7 @@ namespace HuTao.NET.Models
 
     public class TimeData
     {
-        TimeSpan TimeSpan { get; set; }
+        public TimeSpan TimeSpan { get; set; }
         public DateTime CompleteTime { get; set; }
 
         public TimeData(TimeSpan ts, DateTime dt)

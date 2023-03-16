@@ -45,6 +45,14 @@ namespace HuTao.NET
             return await new Wrapper<UserAccountInfo>(clientData).FetchData(url, this.cookie);
         }
 
+        public async Task<GameRoles> GetGenshinRoles(bool IsGenshinOnly = true, string region = "")
+        {
+            string url = clientData.EndPoints.GetRoles.Url;
+            url += IsGenshinOnly ? "?game_biz=hk4e_global" : "";
+            url += region != "" ? $"&region={region}" : "";
+            return await new Wrapper<GameRoles>(clientData).FetchData(url, this.cookie);
+        }
+
         public async Task<GenshinStats> FetchGenshinStats(GenshinUser user)
         {
             string url = clientData.EndPoints.GenshinStats.Url + $"?server={user.server}&role_id={user.uid}";

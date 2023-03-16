@@ -31,6 +31,14 @@ namespace HuTao.NET.Tests
         }
 
         [Fact]
+        public async void GetRoles()
+        {
+            var res = await client.GetGenshinRoles();
+
+            Assert.NotNull(res.data);
+        }
+
+        [Fact]
         public async void AccountInfo()
         {
             var res = await client.GetUserAccountInfoByLToken();
