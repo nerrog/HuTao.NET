@@ -1,4 +1,6 @@
 ﻿using HuTao.NET.Models;
+using HuTao.NET.Util;
+using System.Text.Json.Nodes;
 
 namespace HuTao.NET
 {
@@ -69,6 +71,79 @@ namespace HuTao.NET
         {
             ClientData data = new ClientData();
             return await new Wrapper<Languages>(data).FetchData(data.EndPoints.GetLanguage.Url);
+        }
+
+        public async Task<RewardData> ClaimDailyReward(GenshinUser user)
+        {
+            RewardData data = new RewardData();
+
+            string infoUrl = clientData.EndPoints.RewardInfo.Url + "&lang=" + clientData.Language;
+            string homeUrl = clientData.EndPoints.RewardData.Url + "&lang=" + clientData.Language;
+            string claimUrl = clientData.EndPoints.RewardSign.Url + "&lang=" + clientData.Language;
+
+            //home計算用受け取り日数取得
+            var info = await FetchDynamicApi(infoUrl, false);
+            int days = info?["data"]?["total_sign_day"]?.GetValue<int>() ?? throw new NullReferenceException();
+            days--; //受け取り日数(トータルから-1)
+
+            //homeからアイテム名と数量を取得
+            var home = await FetchDynamicApi(homeUrl, false);
+            string name = home?["data"]?["awards"]?[days]?["name"]?.GetValue<string>() ?? throw new NullReferenceException(); ;
+            int amount = home?["data"]?["awards"]?[days]?["cnt"]?.GetValue<int>() ?? throw new NullReferenceException(); ;
+
+            data.RewardName = name;
+            data.Amount = amount;
+
+            //reward受け取り
+            var sign = await FetchDynamicApi(claimUrl, true);
+            int code = sign?["retcode"]?.GetValue<int>() ?? throw new NullReferenceException();
+            if (code == 0)
+            {
+                data.IsSuccessed = true;
+            }
+            else
+            {
+                string message = sign?["message"]?.GetValue<string>() ?? throw new NullReferenceException();
+                throw new Errors.HoyoLabAPIBadRequestException(message, code);
+            }
+
+            return data;
+        }
+
+
+
+
+        private async Task<JsonNode> FetchDynamicApi(string url, bool isPost = false)
+        {
+            HttpResponseMessage res;
+            if (!isPost)
+            {
+                var req = new HttpRequestMessage(HttpMethod.Get, url);
+
+                req.Headers.Add("x-rpc-app_version", "1.5.0");
+                req.Headers.Add("x-rpc-client_type", "5");
+                req.Headers.Add("x-rpc-language", clientData.Language);
+                req.Headers.Add("user-agent", clientData.UserAgent);
+                req.Headers.Add("Cookie", cookie.GetCookie());
+
+                res = await clientData.HttpClient.SendAsync(req);
+            }
+            else
+            {
+                HttpContent req = new StringContent("");
+
+                req.Headers.Add("x-rpc-app_version", "1.5.0");
+                req.Headers.Add("x-rpc-client_type", "5");
+                req.Headers.Add("x-rpc-language", clientData.Language);
+                clientData.HttpClient.DefaultRequestHeaders.Add("User-Agent", clientData.UserAgent);
+                req.Headers.Add("Cookie", cookie.GetCookie());
+
+                res = await clientData.HttpClient.PostAsync(url, req);
+            }
+
+            string jsonString = await res.Content.ReadAsStringAsync();
+
+            return JsonNode.Parse(jsonString) ?? throw new NullReferenceException();
         }
     }
 }

@@ -69,5 +69,13 @@ namespace HuTao.NET.Tests
 
             Assert.Equal("OK", res.message);
         }
+
+        [Fact]
+        public async void ClaimDailyReward()
+        {
+            var res = await client.ClaimDailyReward(user);
+
+            Assert.True(res.IsSuccessed);
+        }
     }
 }

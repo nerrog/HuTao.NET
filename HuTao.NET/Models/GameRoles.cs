@@ -1,11 +1,11 @@
 ﻿namespace HuTao.NET.Models
 {
-    public class Data
+    public class GameRolesData
     {
-        public List<List> list { get; set; } = new List<List>();
+        public List<GameRole> list { get; set; } = new List<GameRole>();
     }
 
-    public class List
+    public class GameRole
     {
         public string game_biz { get; set; } = "";
         public string region { get; set; } = "";
@@ -21,6 +21,6 @@
     {
         public int retcode { get; set; }
         public string? message { get; set; }
-        public Data? data { get; set; }
+        public GameRolesData? data { get; set; }
     }
 }

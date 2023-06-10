@@ -7,7 +7,14 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>Copyright (c) 2023 nerrog</Copyright>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Version>$(AssemblyVersion)</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Title>HuTao.NET</Title>
+    <Description>Wrapper library for HoyoLab's API to retrieve data about Genshin Impact</Description>
+    <PackageProjectUrl>https://github.com/nerrog/HuTao.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nerrog/HuTao.NET</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
