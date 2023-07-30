@@ -1,6 +1,7 @@
 ﻿using HuTao.NET.Models;
 using HuTao.NET.Util;
 using System.Text.Json.Nodes;
+using static HuTao.NET.Util.Errors;
 
 namespace HuTao.NET
 {
@@ -15,14 +16,14 @@ namespace HuTao.NET
     }
     public class Client
     {
-        private Cookie cookie;
+        private ICookie cookie;
         private ClientData clientData;
-        public Client(Cookie cookie)
+        public Client(ICookie cookie)
         {
             this.cookie = cookie;
             this.clientData = new ClientData();
         }
-        public Client(Cookie cookie, ClientData data)
+        public Client(ICookie cookie, ClientData data)
         {
             this.cookie = cookie;
             this.clientData = data;
@@ -35,9 +36,10 @@ namespace HuTao.NET
         /// <returns></returns>
         public async Task<UserStats> FetchUserStats(string? uid = null)
         {
-            string target_uid = uid ?? cookie.ltuid;
+            string target_uid = uid ?? cookie.GetHoyoUid();
             string url = clientData.EndPoints.UserStats.Url + $"?uid={target_uid}";
             return await new Wrapper<UserStats>(clientData).FetchData(url, this.cookie);
+
         }
 
 
@@ -88,8 +90,8 @@ namespace HuTao.NET
 
             //homeからアイテム名と数量を取得
             var home = await FetchDynamicApi(homeUrl, false);
-            string name = home?["data"]?["awards"]?[days]?["name"]?.GetValue<string>() ?? throw new NullReferenceException(); ;
-            int amount = home?["data"]?["awards"]?[days]?["cnt"]?.GetValue<int>() ?? throw new NullReferenceException(); ;
+            string name = home?["data"]?["awards"]?[days]?["name"]?.GetValue<string>() ?? throw new NullReferenceException();
+            int amount = home?["data"]?["awards"]?[days]?["cnt"]?.GetValue<int>() ?? throw new NullReferenceException();
 
             data.RewardName = name;
             data.Amount = amount;
@@ -100,6 +102,10 @@ namespace HuTao.NET
             if (code == 0)
             {
                 data.IsSuccessed = true;
+            }
+            else if (sign?["data"]?["gt_result"]?["is_risk"]?.GetValue<string>() == "true")
+            {
+                throw new HoyoLabCaptchaBlockException();
             }
             else
             {

@@ -24,5 +24,13 @@ namespace HuTao.NET.Util
             public HoyoLabAPIBadRequestException(string message, Exception innerException) : base(message, innerException) { }
             protected HoyoLabAPIBadRequestException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         }
+
+        public class HoyoLabCaptchaBlockException : Exception
+        {
+            public HoyoLabCaptchaBlockException() : base() { }
+
+            public HoyoLabCaptchaBlockException(string message, Exception innerException) : base(message, innerException) { }
+            protected HoyoLabCaptchaBlockException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        }
     }
 }

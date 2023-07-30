@@ -18,7 +18,7 @@ namespace HuTao.NET
             this.lang = data.Language;
         }
 
-        internal async Task<T> FetchData(string url, Cookie? cookie = null, bool RequireDS = false)
+        internal async Task<T> FetchData(string url, ICookie? cookie = null, bool RequireDS = false)
         {
             var req = new HttpRequestMessage(HttpMethod.Get, url);
 

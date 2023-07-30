@@ -2,7 +2,7 @@ namespace HuTao.NET.Tests
 {
     public class UnitTest
     {
-        private Cookie cookie;
+        private ICookie cookie;
         private Client client;
         private GenshinUser user;
 
@@ -13,13 +13,20 @@ namespace HuTao.NET.Tests
             {
                 str.Add(line);
             }
+            /*
             cookie = new Cookie()
             {
                 ltoken = str[0],
                 ltuid = str[1],
+            };*/
+            cookie = new CookieV2()
+            {
+                ltmid_v2 = str[0],
+                ltoken_v2 = str[1],
+                ltuid_v2 = str[2],
             };
             client = new Client(cookie, new ClientData() { Language = "ja-jp" });
-            user = new GenshinUser(int.Parse(str[2]));
+            user = new GenshinUser(int.Parse(str[3]));
         }
 
         [Fact]
