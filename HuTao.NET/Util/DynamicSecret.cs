@@ -6,7 +6,9 @@ namespace HuTao.NET.Util
     internal class DynamicSecret
     {
         private readonly static string SALT_OVERSEA = "6s25p5ox5y14umn1p61aqyyvbvvl3lrt";
-        private readonly static string SALT_CHINESE = "xV8v4Qu54lUKrEYFZkJhB8cuOh9Asafs";
+
+        //本国API用 未使用
+        //private readonly static string SALT_CHINESE = "xV8v4Qu54lUKrEYFZkJhB8cuOh9Asafs";
 
         private readonly static string TEXT = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 

@@ -1,4 +1,6 @@
-﻿namespace HuTao.NET.Models
+﻿using System.Text.Json.Serialization;
+
+namespace HuTao.NET.Models
 {
     public class UserAccountInfo : IHoyoLab
     {
@@ -9,35 +11,36 @@
 
         public class AccountInfoData
         {
-            public string? account_id { get; set; }
-
-            public string? account_name { get; set; }
-
-            public string? apple_name { get; set; }
-
-            public string? area_code { get; set; }
-
-            public string? email { get; set; }
-
-            public string? facebook_name { get; set; }
-
-            public string? game_center_name { get; set; }
-
-            public int gender { get; set; }
-
-            public string? google_name { get; set; }
-
-            public string? mobile { get; set; }
-
-            public string? nick_name { get; set; }
-
-            public string? sony_name { get; set; }
-
-            public string? steam_name { get; set; }
-
-            public string? twitter_name { get; set; }
-
-            public int user_icon_id { get; set; }
+            [JsonPropertyName("account_id")]
+            public string? AccountId { get; set; }
+            [JsonPropertyName("account_name")]
+            public string? AccountName { get; set; }
+            [JsonPropertyName("apple_name")]
+            public string? AppleName { get; set; }
+            [JsonPropertyName("area_code")]
+            public string? AreaCode { get; set; }
+            [JsonPropertyName("email")]
+            public string? Email { get; set; }
+            [JsonPropertyName("facebook_name")]
+            public string? FacebookName { get; set; }
+            [JsonPropertyName("game_center_name")]
+            public string? GameCenterName { get; set; }
+            [JsonPropertyName("gender")]
+            public int Gender { get; set; }
+            [JsonPropertyName("google_name")]
+            public string? GoogleName { get; set; }
+            [JsonPropertyName("mobile")]
+            public string? Mobile { get; set; }
+            [JsonPropertyName("nick_name")]
+            public string? NickName { get; set; }
+            [JsonPropertyName("sony_name")]
+            public string? SonyName { get; set; }
+            [JsonPropertyName("steam_name")]
+            public string? SteamName { get; set; }
+            [JsonPropertyName("twitter_name")]
+            public string? TwitterName { get; set; }
+            [JsonPropertyName("user_icon_id")]
+            public int UserIconId { get; set; }
         }
     }
 }

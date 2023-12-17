@@ -4,14 +4,19 @@ namespace HuTao.NET.Util
 {
     public class Errors
     {
+        /// <summary>
+        /// 有効な原神アカウントが見つからなかった際にスローされる例外
+        /// </summary>
         public class AccountNotFoundException : Exception
         {
             public AccountNotFoundException() : base() { }
             public AccountNotFoundException(string message) : base(message) { }
             public AccountNotFoundException(string message, Exception innerException) : base(message, innerException) { }
-            protected AccountNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         }
 
+        /// <summary>
+        /// HoyoLabAPIから無効な結果が返ってきた際にスローされる例外
+        /// </summary>
         public class HoyoLabAPIBadRequestException : Exception
         {
             private int retcode;
@@ -22,15 +27,27 @@ namespace HuTao.NET.Util
             }
 
             public HoyoLabAPIBadRequestException(string message, Exception innerException) : base(message, innerException) { }
-            protected HoyoLabAPIBadRequestException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         }
 
+        /// <summary>
+        /// APIがキャプチャ認証でブロックされた際にスローされる例外
+        /// </summary>
         public class HoyoLabCaptchaBlockException : Exception
         {
             public HoyoLabCaptchaBlockException() : base() { }
 
             public HoyoLabCaptchaBlockException(string message, Exception innerException) : base(message, innerException) { }
-            protected HoyoLabCaptchaBlockException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        }
+
+
+        /// <summary>
+        /// ログイン報酬を既に受け取っている際にスローされる例外
+        /// </summary>
+        public class DailyRewardAlreadyReceivedException : Exception
+        {
+            public DailyRewardAlreadyReceivedException() : base() { }
+
+            public DailyRewardAlreadyReceivedException(string message, Exception innerException) : base(message, innerException) { }
         }
     }
 }

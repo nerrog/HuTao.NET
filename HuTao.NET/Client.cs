@@ -103,6 +103,10 @@ namespace HuTao.NET
             {
                 data.IsSuccessed = true;
             }
+            else if (code == -5003)
+            {
+                throw new DailyRewardAlreadyReceivedException();
+            }
             else if (sign?["data"]?["gt_result"]?["is_risk"]?.GetValue<string>() == "true")
             {
                 throw new HoyoLabCaptchaBlockException();

@@ -13,39 +13,62 @@ namespace HuTao.NET.Models
     {
         [JsonPropertyName("list")]
         public List<GameList>? GameLists { get; set; }
-        public string? name { get; set; }
-        public int? type { get; set; }
-        public string? value { get; set; }
+        [JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [JsonPropertyName("type")]
+        public int? Type { get; set; }
+        [JsonPropertyName("Vame")]
+        public string? Value { get; set; }
     }
     public class GameList
     {
-        public bool has_role { get; set; }
-        public int game_id { get; set; }
-        public string? game_role_id { get; set; }
-        public string? nickname { get; set; }
-        public string? region { get; set; }
-        public int level { get; set; }
-        public string? background_image { get; set; }
-        public bool is_public { get; set; }
-        public List<GameData>? data { get; set; }
-        public string? region_name { get; set; }
-        public string? url { get; set; }
-        public List<DataSwitch>? data_switches { get; set; }
-        public List<object>? h5_data_switches { get; set; }
-        public string? background_color { get; set; }
+        [JsonPropertyName("has_role")]
+        public bool HasRole { get; set; }
+        [JsonPropertyName("game_id")]
+        public int GameId { get; set; }
+        [JsonPropertyName("game_role_id")]
+        public string? GameUid { get; set; }
+        [JsonPropertyName("nickname")]
+        public string? Nickname { get; set; }
+        [JsonPropertyName("region")]
+        public string? Region { get; set; }
+        [JsonPropertyName("level")]
+        public int Level { get; set; }
+        [JsonPropertyName("background_image")]
+        public string? BackgroundImage { get; set; }
+        [JsonPropertyName("is_public")]
+        public bool IsPublic { get; set; }
+        [JsonPropertyName("data")]
+        public List<GameData>? Data { get; set; }
+        [JsonPropertyName("region_name")]
+        public string? RegionName { get; set; }
+        [JsonPropertyName("url")]
+        public string? Url { get; set; }
+        [JsonPropertyName("data_switches")]
+        public List<DataSwitch>? DataSwitches { get; set; }
+        [JsonPropertyName("h5_data_switches")]
+        public List<object>? H5DataSwitches { get; set; }
+        [JsonPropertyName("background_color")]
+        public string? BackgroundColor { get; set; }
     }
 
     public class GameData
     {
-        public string? name { get; set; }
-        public int? type { get; set; }
-        public string? value { get; set; }
+        [JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [JsonPropertyName("type")]
+        public int? Type { get; set; }
+        [JsonPropertyName("value")]
+        public string? Value { get; set; }
     }
 
     public class DataSwitch
     {
-        public int? switch_id { get; set; }
-        public bool? is_public { get; set; }
-        public string? switch_name { get; set; }
+        [JsonPropertyName("switch_id")]
+        public int? SwitchId { get; set; }
+        [JsonPropertyName("is_public")]
+        public bool? IsPublic { get; set; }
+        [JsonPropertyName("switch_name")]
+        public string? SwitchName { get; set; }
     }
 }

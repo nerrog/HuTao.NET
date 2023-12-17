@@ -20,9 +20,9 @@ namespace HuTao.NET
             int uid = 0;
             Parallel.ForEach(user.data!.GameLists!, game =>
             {
-                if (game.game_id == GENSHIN_GAME_ID)
+                if (game.GameId == GENSHIN_GAME_ID)
                 {
-                    uid = int.Parse(game.game_role_id!);
+                    uid = int.Parse(game.GameUid!);
                 }
             });
 
